@@ -1,0 +1,7 @@
+C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\AcmeDrill.cs\AcmeDrill.cs\obj\Debug\AcmeDrill.cs.csprojAssemblyReference.cache
+C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\AcmeDrill.cs\AcmeDrill.cs\obj\Debug\AcmeDrill.cs.csproj.CoreCompileInputs.cache
+C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\AcmeDrill.cs\AcmeDrill.cs\bin\Debug\AcmeDrill.cs.exe.config
+C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\AcmeDrill.cs\AcmeDrill.cs\bin\Debug\AcmeDrill.cs.exe
+C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\AcmeDrill.cs\AcmeDrill.cs\bin\Debug\AcmeDrill.cs.pdb
+C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\AcmeDrill.cs\AcmeDrill.cs\obj\Debug\AcmeDrill.cs.exe
+C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\AcmeDrill.cs\AcmeDrill.cs\obj\Debug\AcmeDrill.cs.pdb
