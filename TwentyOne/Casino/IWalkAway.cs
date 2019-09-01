@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwentyOne
+namespace Casino.Interfaces
+
 {
     interface IWalkAway //When naming an interface always start with a capital "I" just like "IWalkAway" the WalkAway starts with "I".
     {

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwentyOne
-{
+namespace Casino
+{ 
     public class Player
     {
         public Player(string name, int beginningBalance)
@@ -19,7 +19,8 @@ namespace TwentyOne
         public int Balance { get; set; }
         public string Name { get; set; }
         public bool isActivelyPlaying { get; set; }
-        public bool Stay { get; set; }
+        public bool Stay { get; set; } 
+        public Guid Id { get; set; }
 
 
         public bool Bet(int amount)
