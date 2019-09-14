@@ -17,8 +17,10 @@ namespace CarInsurance.Controllers
         // GET: Insuree
         public ActionResult Index()
         {
+            
             return View(db.Insurees.ToList());
         }
+
 
         // GET: Insuree/Details/5
         public ActionResult Details(int? id)
@@ -122,6 +124,118 @@ namespace CarInsurance.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        
+        
+
+        public ActionResult Create(string firstName, string lastName, string emailAddress, DateTime dateofbirth , int caryear, string carmake, string carmodel, int speedingtickets, bool dui, bool coveragetype, int quote )
+
+        {
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(emailAddress) || string.IsNullOrEmpty(carmake) || string.IsNullOrEmpty(carmodel))
+            {
+                return View("~/Views/Shared/Error.cshtml");
+            }
+            else
+            {
+                using (InsuranceEntities db = new InsuranceEntities())
+                {
+                    var signup = new Insuree();
+                    signup.FirstName = firstName;
+                    signup.LastName = lastName;
+                    signup.EmailAddress = emailAddress;
+                    signup.DateOfBirth = dateofbirth;
+                    signup.CarYear = caryear;
+                    signup.SpeedingTickets = speedingtickets;
+                    signup.Dui = dui;
+                    signup.CoverageType = coveragetype;
+                    signup.Quote = quote;
+
+
+                    quote = 50;
+                    var today = DateTime.Today;
+                    var age = today.Year - dateofbirth.Year;
+                    if (dateofbirth > today.AddYears(-25))
+                    {
+                        quote = quote + 25;
+                    }
+                    else if (dateofbirth > today.AddYears(-18))
+                    {
+                        quote = quote + 100;
+
+                    }
+                    else if (dateofbirth > today.AddYears(-100))
+                    {
+                        quote = quote + 25;
+                    }
+
+
+                    if (caryear < 2000)
+                    {
+                        quote = quote + 25;
+                    }
+                    else if (caryear > 2015)
+                    {
+                        quote = quote + 25;
+                    }
+
+                    if (carmake == "Porsche")
+                    {
+                       quote = quote + 25;
+                    }
+
+                    if (carmake == "Porsche" && carmodel == "911 Carrera")
+                    {
+                        quote = quote + 25;
+                    }
+                    
+                    if (speedingtickets > 0)
+                    {
+                        quote = quote + (speedingtickets * 10);
+                    }
+
+
+
+                    if (dui)
+                    {
+                        quote = quote + (quote * 25 / 100);
+                    }
+                    else
+                    {
+                        quote = quote + 0;
+                    }
+
+
+
+                    if (coveragetype)
+                    {
+                        quote = quote + (quote * 50 / 100);
+                    }
+                    else
+                    {
+                        quote = quote + 0;
+                    }
+
+
+                    signup.Quote = quote;
+
+                    db.Insurees.Add(signup);
+                    db.SaveChanges();
+                    
+                    @ViewBag.Total = quote;
+
+
+                    
+                    return View("Total");
+
+
+                }
+                 
+                   
+
+
+            }
+
+            
         }
     }
 }
