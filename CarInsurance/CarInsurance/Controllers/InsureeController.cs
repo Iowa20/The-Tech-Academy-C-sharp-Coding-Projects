@@ -17,7 +17,7 @@ namespace CarInsurance.Controllers
         // GET: Insuree
         public ActionResult Index()
         {
-            
+
             return View(db.Insurees.ToList());
         }
 
@@ -52,129 +52,101 @@ namespace CarInsurance.Controllers
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,EmailAddress,DateOfBirth,CarYear,CarMake,CarModel,Dui,SpeedingTickets,CoverageType,Quote")] Insuree insuree)
 
         {
-            if (ModelState.IsValid)
-            {
-                db.Insurees.Add(insuree);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(insuree);
-
-
-
-        }
-        private ActionResult Create(string firstName, string lastName, string emailAddress, DateTime dateofbirth, int caryear, string carmake, string carmodel, int speedingtickets, bool dui, bool coveragetype, int quote)
-
-        {
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(emailAddress) || string.IsNullOrEmpty(carmake) || string.IsNullOrEmpty(carmodel))
+            if (string.IsNullOrEmpty(insuree.FirstName) || string.IsNullOrEmpty(insuree.LastName) || string.IsNullOrEmpty(insuree.EmailAddress) || string.IsNullOrEmpty(insuree.CarMake) || string.IsNullOrEmpty(insuree.CarModel))
             {
                 return View("~/Views/Shared/Error.cshtml");
             }
             else
             {
-                using (InsuranceEntities db = new InsuranceEntities())
+
+                insuree.Quote = 50;
+                var today = DateTime.Today;
+                var age = today.Year - insuree.DateOfBirth.Year;
+                if (insuree.DateOfBirth > today.AddYears(-25))
                 {
-                    var signup = new Insuree();
-                    signup.FirstName = firstName;
-                    signup.LastName = lastName;
-                    signup.EmailAddress = emailAddress;
-                    signup.DateOfBirth = dateofbirth;
-                    signup.CarYear = caryear;
-                    signup.SpeedingTickets = speedingtickets;
-                    signup.Dui = dui;
-                    signup.CoverageType = coveragetype;
-                    signup.Quote = quote;
+                    insuree.Quote = insuree.Quote + 25;
+                }
+                else if (insuree.DateOfBirth > today.AddYears(-18))
+                {
+                    insuree.Quote = insuree.Quote + 100;
+
+                }
+                else if (insuree.DateOfBirth > today.AddYears(-100))
+                {
+                    insuree.Quote = insuree.Quote + 25;
+                }
 
 
-                    quote = 50;
-                    var today = DateTime.Today;
-                    var age = today.Year - dateofbirth.Year;
-                    if (dateofbirth > today.AddYears(-25))
-                    {
-                        quote = quote + 25;
-                    }
-                    else if (dateofbirth > today.AddYears(-18))
-                    {
-                        quote = quote + 100;
+                if (insuree.CarYear < 2000)
+                {
+                    insuree.Quote = insuree.Quote + 25;
+                }
+                else if (insuree.CarYear > 2015)
+                {
+                    insuree.Quote = insuree.Quote + 25;
+                }
 
-                    }
-                    else if (dateofbirth > today.AddYears(-100))
-                    {
-                        quote = quote + 25;
-                    }
+                if (insuree.CarMake == "Porsche")
+                {
+                    insuree.Quote = insuree.Quote + 25;
+                }
 
+                if (insuree.CarMake == "Porsche" && insuree.CarModel == "911 Carrera")
+                {
+                    insuree.Quote = insuree.Quote + 25;
+                }
 
-                    if (caryear < 2000)
-                    {
-                        quote = quote + 25;
-                    }
-                    else if (caryear > 2015)
-                    {
-                        quote = quote + 25;
-                    }
-
-                    if (carmake == "Porsche")
-                    {
-                        quote = quote + 25;
-                    }
-
-                    if (carmake == "Porsche" && carmodel == "911 Carrera")
-                    {
-                        quote = quote + 25;
-                    }
-
-                    if (speedingtickets > 0)
-                    {
-                        quote = quote + (speedingtickets * 10);
-                    }
-
-
-
-                    if (dui)
-                    {
-                        quote = quote + (quote * 25 / 100);
-                    }
-                    else
-                    {
-                        quote = quote + 0;
-                    }
-
-
-
-                    if (coveragetype)
-                    {
-                        quote = quote + (quote * 50 / 100);
-                    }
-                    else
-                    {
-                        quote = quote + 0;
-                    }
-
-
-                    signup.Quote = quote;
-
-                    db.Insurees.Add(signup);
-                    db.SaveChanges();
-
-                    @ViewBag.Total = quote;
-
-
-
-                    return View("Total");
-
-
+                if (insuree.SpeedingTickets > 0)
+                {
+                    insuree.Quote = insuree.Quote + (insuree.SpeedingTickets * 10);
                 }
 
 
 
+                if (insuree.Dui)
+                {
+                    insuree.Quote = insuree.Quote + (insuree.Quote * 25 / 100);
+                }
+                else
+                {
+                    insuree.Quote = insuree.Quote + 0;
+                }
+
+
+
+                if (insuree.CoverageType)
+                {
+                    insuree.Quote = insuree.Quote + (insuree.Quote * 50 / 100);
+                }
+                else
+                {
+                    insuree.Quote = insuree.Quote + 0;
+                }
+
+                var signup = new Insuree();
+                signup.Quote = insuree.Quote;
+
+                db.Insurees.Add(signup);
+                db.SaveChanges();
+
+                @ViewBag.Total = insuree.Quote;
+
+
+
+                return View("Total");
+
 
             }
-
 
         }
 
 
+        
+
+
+    
+
+    
 
         // GET: Insuree/Edit/5
         public ActionResult Edit(int? id)
