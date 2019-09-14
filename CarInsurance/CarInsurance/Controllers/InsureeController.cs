@@ -49,7 +49,22 @@ namespace CarInsurance.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create(string firstName, string lastName, string emailAddress, DateTime dateofbirth, int caryear, string carmake, string carmodel, int speedingtickets, bool dui, bool coveragetype, int quote)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,EmailAddress,DateOfBirth,CarYear,CarMake,CarModel,Dui,SpeedingTickets,CoverageType,Quote")] Insuree insuree)
+
+        {
+            if (ModelState.IsValid)
+            {
+                db.Insurees.Add(insuree);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(insuree);
+
+
+
+        }
+        private ActionResult Create(string firstName, string lastName, string emailAddress, DateTime dateofbirth, int caryear, string carmake, string carmodel, int speedingtickets, bool dui, bool coveragetype, int quote)
 
         {
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(emailAddress) || string.IsNullOrEmpty(carmake) || string.IsNullOrEmpty(carmodel))
@@ -138,8 +153,8 @@ namespace CarInsurance.Controllers
 
 
                     signup.Quote = quote;
+
                     db.Insurees.Add(signup);
-                   
                     db.SaveChanges();
 
                     @ViewBag.Total = quote;
@@ -158,6 +173,7 @@ namespace CarInsurance.Controllers
 
 
         }
+
 
 
         // GET: Insuree/Edit/5
@@ -189,6 +205,7 @@ namespace CarInsurance.Controllers
                 return RedirectToAction("Index");
             }
             return View(insuree);
+
         }
 
         // GET: Insuree/Delete/5
@@ -225,8 +242,41 @@ namespace CarInsurance.Controllers
             }
             base.Dispose(disposing);
         }
-        
-        
+        public class Admin : Controller
+        {
+            public ActionResult Index()
+            {
+                using (InsuranceEntities db = new InsuranceEntities())
+                {
 
-     }
+                    var signups = db.Insurees.Where(x => x == null).ToList();
+
+                    var signupVms = new List<Insuree>();
+                    foreach (var signup in signups)
+                    {
+                        var signupVm = new Insuree();
+                        signupVm.Id = signup.Id;
+                        signupVm.FirstName = signup.FirstName;
+                        signupVm.LastName = signup.LastName;
+                        signupVm.EmailAddress = signup.EmailAddress;
+                        signupVm.Quote = Convert.ToInt32(signup.Quote);
+
+
+
+
+                        signupVms.Add(signupVm);
+                    }
+
+                    return View(signupVms);
+
+                }
+
+
+
+
+            }
+        }
+
+
+    }
 }
