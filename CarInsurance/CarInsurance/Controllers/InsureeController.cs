@@ -123,8 +123,7 @@ namespace CarInsurance.Controllers
                     insuree.Quote = insuree.Quote + 0;
                 }
 
-                //var signup = new Insuree();
-                //signup.Quote = insuree.Quote;
+                
 
                 db.Insurees.Add(insuree);
                 db.SaveChanges();
@@ -134,7 +133,7 @@ namespace CarInsurance.Controllers
 
                 return RedirectToAction("Details",
                 new { id = insuree.Id });
-                //return View("");
+                
 
 
             }
@@ -215,39 +214,32 @@ namespace CarInsurance.Controllers
             }
             base.Dispose(disposing);
         }
-        public class Admin : Controller
+
+        public ActionResult Admin()
         {
-            public ActionResult Index()
+            var signups = db.Insurees.ToList();
+
+            var signupVms = new List<Insuree>();
+            foreach (var signup in signups)
             {
-                using (InsuranceEntities db = new InsuranceEntities())
-                {
-
-                    var signups = db.Insurees.Where(x => x == null).ToList();
-
-                    var signupVms = new List<Insuree>();
-                    foreach (var signup in signups)
-                    {
-                        var signupVm = new Insuree();
-                        signupVm.Id = signup.Id;
-                        signupVm.FirstName = signup.FirstName;
-                        signupVm.LastName = signup.LastName;
-                        signupVm.EmailAddress = signup.EmailAddress;
-                        signupVm.Quote = Convert.ToInt32(signup.Quote);
+                var signupVm = new Insuree();
+                signupVm.Id = signup.Id;
+                signupVm.FirstName = signup.FirstName;
+                signupVm.LastName = signup.LastName;
+                signupVm.EmailAddress = signup.EmailAddress;
+                signupVm.Quote = Convert.ToInt32(signup.Quote);
 
 
 
 
-                        signupVms.Add(signupVm);
-                    }
+                //signupVms.Add(signupVm);
+                db.Insurees.Add(signupVm);
+                db.SaveChanges();
 
-                    return View(signupVms);
-
-                }
-
-
-
-
+                //@ViewBag.Admin = Insuree.ReferenceEquals;
             }
+
+            return View(signupVms);
         }
 
 
