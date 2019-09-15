@@ -217,31 +217,31 @@ namespace CarInsurance.Controllers
 
         public ActionResult Admin()
         {
-            var signups = db.Insurees.ToList();
+            //var signups = db.Insurees.ToList();
 
-            var signupVms = new List<Insuree>();
-            foreach (var signup in signups)
-            {
-                var signupVm = new Insuree();
-                signupVm.Id = signup.Id;
-                signupVm.FirstName = signup.FirstName;
-                signupVm.LastName = signup.LastName;
-                signupVm.EmailAddress = signup.EmailAddress;
-                signupVm.Quote = Convert.ToInt32(signup.Quote);
-
-
+            //var signupVms = new List<Insuree>();
+            //foreach (var signup in signups)
+            //{
+            //var signupVm = new Insuree();
+            //signupVm.Id = signup.Id;
+            //signupVm.FirstName = signup.FirstName;
+            //signupVm.LastName = signup.LastName;
+            //signupVm.EmailAddress = signup.EmailAddress;
+            //signupVm.Quote = Convert.ToInt32(signup.Quote);
 
 
-                //signupVms.Add(signupVm);
-                db.Insurees.Add(signupVm);
+
+            return View(db.Insurees.ToList());
+            //signupVms.Add(signupVm);
+            //db.Insurees.Add(signupVm);
                 db.SaveChanges();
 
                 //@ViewBag.Admin = Insuree.ReferenceEquals;
             }
 
-            return View(signupVms);
+            //return View(signupVms);
         }
 
 
     }
-}
+
