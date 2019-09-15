@@ -123,17 +123,18 @@ namespace CarInsurance.Controllers
                     insuree.Quote = insuree.Quote + 0;
                 }
 
-                var signup = new Insuree();
-                signup.Quote = insuree.Quote;
+                //var signup = new Insuree();
+                //signup.Quote = insuree.Quote;
 
-                db.Insurees.Add(signup);
+                db.Insurees.Add(insuree);
                 db.SaveChanges();
 
                 @ViewBag.Total = insuree.Quote;
 
 
-
-                return View("Total");
+                return RedirectToAction("Details",
+                new { id = insuree.Id });
+                //return View("");
 
 
             }
