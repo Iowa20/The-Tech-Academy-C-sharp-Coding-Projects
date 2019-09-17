@@ -1,0 +1,3 @@
+﻿Enable-Migrations -ContextTypeName NbaContext -MigrationsDirectory Migrations\NBA
+add-migration -ConfigurationTypeName CodeFirst.Migrations.NBA.Configuration "InitialCreate"
+update-database -ConfigurationTypeName CodeFirst.Migrations.NBA.Configuration
