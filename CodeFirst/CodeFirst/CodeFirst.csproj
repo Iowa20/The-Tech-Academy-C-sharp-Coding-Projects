@@ -127,14 +127,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Data\DummyData.cs" />
     <Compile Include="Data\NbaContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\NBA\201909170246115_InitialCreate1.cs" />
-    <Compile Include="Migrations\NBA\201909170246115_InitialCreate1.Designer.cs">
-      <DependentUpon>201909170246115_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\NBA\201909172319229_InitialCreate.cs" />
+    <Compile Include="Migrations\NBA\201909172319229_InitialCreate.Designer.cs">
+      <DependentUpon>201909172319229_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\NBA\Configuration.cs" />
     <Compile Include="Models\NBA\Player.cs" />
@@ -142,6 +144,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\NBA.mdf" />
+    <Content Include="App_Data\NBA_log.ldf">
+      <DependentUpon>NBA.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -218,10 +224,18 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Teams\Create.cshtml" />
+    <Content Include="Views\Teams\Delete.cshtml" />
+    <Content Include="Views\Teams\Details.cshtml" />
+    <Content Include="Views\Teams\Edit.cshtml" />
+    <Content Include="Views\Teams\Index.cshtml" />
+    <Content Include="Views\Players\Create.cshtml" />
+    <Content Include="Views\Players\Delete.cshtml" />
+    <Content Include="Views\Players\Details.cshtml" />
+    <Content Include="Views\Players\Edit.cshtml" />
+    <Content Include="Views\Players\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
@@ -232,8 +246,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\NBA\201909170246115_InitialCreate1.resx">
-      <DependentUpon>201909170246115_InitialCreate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\NBA\201909172319229_InitialCreate.resx">
+      <DependentUpon>201909172319229_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -83,4 +83,3 @@ C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\CodeFir
 C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\CodeFirst\CodeFirst\obj\Debug\CodeFirst.pdb
 C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\CodeFirst\CodeFirst\obj\Debug\CodeFirst.Migrations.NBA.InitialCreate.resources
 C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\CodeFirst\CodeFirst\obj\Debug\CodeFirst.csproj.GenerateResource.cache
-C:\Users\nin_i\OneDrive\Desktop\The-Tech-Academy-C-sharp-Coding-Projects\CodeFirst\CodeFirst\obj\Debug\CodeFirst.Migrations.NBA.InitialCreate1.resources
